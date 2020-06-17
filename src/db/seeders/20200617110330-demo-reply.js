@@ -21,7 +21,7 @@ for (let i = 0; i < 50; i += 1) {
 }
 
 module.exports = {
-  up: (queryInterface) => queryInterface.bulkInsert('replies', replies, {}),
+  up: (queryInterface) => queryInterface.bulkInsert('Replies', replies, {}),
 
-  down: (queryInterface) => queryInterface.bulkDelete('replies', null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete('Replies', null, {}),
 };
