@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'Reply',
     {
       content: DataTypes.STRING,
+      commentId: DataTypes.INTEGER,
     },
     {}
   );

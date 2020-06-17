@@ -3,7 +3,7 @@ import UserController from '../controllers/UserController';
 
 const userRoute = express();
 
-userRoute.post('/signup', UserController.signUp);
+userRoute.post('/register', UserController.signUp);
 userRoute.post('/login', UserController.login);
 
 export default userRoute;
