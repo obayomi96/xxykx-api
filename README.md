@@ -36,3 +36,6 @@ This project creates a backend REST APIs and a UI using Node.js with Express as 
 - run seed `npm run seed`
 - Navigate to localhost:xxxx on POSTMAN
 - install POSTMAN app to test API Endpoints (https://www.getpostman.com/apps)
+
+### Author
+- Martins Obayomi
