@@ -4,7 +4,7 @@
   "description": "Simple comments API with authentication",
   "main": "index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./build",
+    "build": "npm run clean && npm run migrate && npm run seed && babel ./src --out-dir ./build",
     "start": "export DEBUG=dev && nodemon --exec babel-node src/app.js",
     "clean": "rm -rf build && mkdir build",
     "lint": "eslint .",
