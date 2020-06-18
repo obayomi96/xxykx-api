@@ -11,7 +11,7 @@ module.exports = {
     logging: false,
   },
   production: {
-    use_env_variable: 'DATABASE_URl',
+    use_env_variable: 'DATABASE_URL',
     logging: false,
   },
 };
