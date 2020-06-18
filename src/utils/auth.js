@@ -46,6 +46,18 @@ class Auth {
   static comparePassword(password, hashPassword) {
     return bcrypt.compareSync(password, hashPassword);
   }
+
+  /**
+   * @static
+   * @description verifies a user
+   * @param {String} password - Request object
+   * @param {String} hashPassword - Response object
+   * @returns {Boolean} Returns true if the password is correct
+   * @memberof Auth
+   */
+  static async verifyUserToken(token, callBack) {
+    return jwt.verify(token, secret, callBack);
+  }
 }
 
 export default Auth;

@@ -25,7 +25,7 @@ class Authenticate {
       req.headers.authorization.split(' ')[1] || authorizationHeader;
     let verifiedUser;
     try {
-      verifiedUser = await auth.verifyToken(token, async (err, decoded) => {
+      verifiedUser = await auth.verifyUserToken(token, async (err, decoded) => {
         if (err) {
           throw new Error();
         }
@@ -40,7 +40,7 @@ class Authenticate {
       return errorStat(res, 404, 'user not found');
     }
     req.user = user;
-    next();
+    return next();
   }
 
   /**

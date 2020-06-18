@@ -1,5 +1,7 @@
 import express from 'express';
 import userRoute from './user';
+import commentRoute from './comment';
+import ReplyRoute from './reply';
 
 const router = express();
 
@@ -11,5 +13,7 @@ router.get('/', (req, res) =>
 );
 
 router.use('/', userRoute);
+router.use('/comments', commentRoute);
+router.use('/comments', ReplyRoute);
 
 export default router;
