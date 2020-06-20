@@ -7,6 +7,7 @@ const commentRoute = express();
 
 commentRoute.post('/', middlewares.verifyToken, CommentController.addComment);
 commentRoute.get('/', CommentController.getComments);
+commentRoute.get('/:comment_id', CommentController.getSingleComment);
 commentRoute.patch(
   '/:comment_id',
   middlewares.verifyToken,

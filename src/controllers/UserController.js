@@ -51,7 +51,12 @@ class UserController {
     const { email, password } = req.body.user;
     const user = await models.User.findOne({ where: { email } });
 
-    if (!user) return utils.errorStat(res, 401, 'Incorrect Login information');
+    if (!user)
+      return utils.errorStat(
+        res,
+        401,
+        'User not found, check your login details'
+      );
     const matchPasswords = auth.comparePassword(password, user.password);
     if (!matchPasswords) {
       return utils.errorStat(res, 401, 'Incorrect Login information');

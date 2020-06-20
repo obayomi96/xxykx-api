@@ -42,6 +42,38 @@ class CommentController {
   }
 
   /**
+   * @static
+   * @description Allows a user to create a comment
+   * @param {Object} req - Request object
+   * @param {Object} res - Response object
+   * @returns {Object} Single Commentg
+   * @memberof CommentController
+   */
+  static async getSingleComment(req, res) {
+    const { comment_id } = req.params;
+    if (!comment_id) {
+      return utils.errorStat(res, 400, 'comment_id is required');
+    }
+    const comment = await models.Comment.findOne({
+      where: { id: comment_id },
+      include: [
+        {
+          as: 'user',
+          model: models.User,
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          as: 'replies',
+          model: models.Reply,
+          attributes: ['id', 'content'],
+        },
+      ],
+    });
+    if (!comment) return utils.errorStat(res, 401, 'Comment not found');
+    return utils.successStat(res, 200, 'comment', comment);
+  }
+
+  /**
    * @description Allows user get comments
    * @param {Object} req - request object
    * @param {Object} res - response object
