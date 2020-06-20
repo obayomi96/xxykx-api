@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     Reply.belongsTo(models.Comment, {
       foreignKey: 'commentId',
       as: 'comment',
-      onDelete: 'CASCADE',
+    });
+    Reply.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user',
     });
   };
   return Reply;

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import sequelize from 'sequelize';
 import models from '../db/models';
 import utils from '../utils/response';
@@ -69,8 +70,38 @@ class UserController {
         email: user.email,
       }),
       name: user.name,
-      email: user.name,
+      email: user.email,
     });
+  }
+
+  /**
+   * @static
+   * @description Allows a user to create a comment
+   * @param {Object} req - Request object
+   * @param {Object} res - Response object
+   * @returns {Object} Single Commentg
+   * @memberof UserController
+   */
+  static async fetchOwnUserProfile(req, res) {
+    const { user_id } = req.params;
+    if (!user_id) {
+      return utils.errorStat(res, 400, 'user_id is required');
+    }
+    if (parseInt(user_id, 10) !== req.user.id) {
+      return utils.errorStat(res, 403, 'Unauthorized');
+    }
+    const profile = await models.User.findOne({
+      where: { id: user_id },
+      include: [
+        {
+          as: 'comments',
+          model: models.Comment,
+          attributes: ['id', 'content'],
+        },
+      ],
+    });
+    if (!profile) return utils.errorStat(res, 401, 'Profile not found');
+    return utils.successStat(res, 200, 'profile', profile);
   }
 }
 
