@@ -14,21 +14,25 @@ This project creates a backend REST APIs and a UI using Node.js with Express as 
 
 ## Features
 ### API
+<ul>
 <li> POST /login</li>
 <li> POST /register</li>
-<h1> GET /me/:id - (Returns a logged in user and it's comments)</li>
-
+<l1> GET /me/:id - (Returns a logged in user and it's comments)</li>
 <li> POST /comments</li>
 <li> GET /comments - (Should return with all replies)</li>
 <li> GET /comments/comment_id - (Should return a single comment, it's author and replies)</li>
 <li> PATCH /comments/comment_id</li>
 <li> DELETE /comments/comment_id</li>
 <li>POST /comments/:comment_id/replies - (should reply to a comment)</li>
+</ul>
 
 ### UI
+<ul>
 <li> Sign up page.</li>
 <li> Sign in page.</li>
 <li> Comments page with replies. It shouldn’t require authentication to view the comments, but creating, updating and deleting should require authentication.</li>
+</ul>
+
 
 ## Getting Started
 ### Installation
