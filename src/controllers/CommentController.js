@@ -43,10 +43,10 @@ class CommentController {
 
   /**
    * @static
-   * @description Allows a user to create a comment
+   * @description Fetches a single comment
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @returns {Object} Single Commentg
+   * @returns {Object} Single Comment
    * @memberof CommentController
    */
   static async getSingleComment(req, res) {
@@ -102,7 +102,7 @@ class CommentController {
   }
 
   /**
-   * @description updates a sinlge article
+   * @description updates a sinlge comment
    * @param {Object} req - request object
    * @param {Object} res - response object
    * @returns {Object} returns updated comments
@@ -156,7 +156,7 @@ class CommentController {
   }
 
   /**
-   * @description deletes a sinlge article
+   * @description deletes a sinlge comment
    * @param {Object} req - request object
    * @param {Object} res - response object
    * @returns {Object} returns a message

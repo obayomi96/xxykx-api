@@ -17,7 +17,8 @@ This project creates a backend REST APIs and a UI using Node.js with Express as 
 <ul>
 <li> POST /login</li>
 <li> POST /register</li>
-<l1> GET /me/:user_id - (Returns a logged in user and it's comments)</li>
+<l1> GET /me/:user_id - (Returns the logged in user's full profile and it's comments)</li>
+<li> GET /users/:user_id - (Returns another user's profile) </li>
 <l1> PATCH /me/:user_id </li>
 <li> POST /comments</li>
 <li> GET /comments - (Should return with all replies)</li>

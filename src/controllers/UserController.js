@@ -76,13 +76,13 @@ class UserController {
 
   /**
    * @static
-   * @description Allows a user to create a comment
+   * @description Allows a user to fetch own profile
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @returns {Object} Single Commentg
+   * @returns {Object} Single user profile
    * @memberof UserController
    */
-  static async fetchOwnUserProfile(req, res) {
+  static async fetchOwnProfile(req, res) {
     const { user_id } = req.params;
     const { id } = req.user;
     if (!user_id) {
@@ -105,11 +105,41 @@ class UserController {
     return utils.successStat(res, 200, 'profile', profile);
   }
 
+   /**
+   * @static
+   * @description Allows a user to create a comment
+   * @param {Object} req - Request object
+   * @param {Object} res - Response object
+   * @returns {Object} Single Commentg
+   * @memberof UserController
+   */
+  static async fetchProfile(req, res) {
+    const { user_id } = req.params;
+    if (!user_id) {
+      return utils.errorStat(res, 400, 'user_id is required');
+    }
+    const profile = await models.User.findOne({
+      where: { id: user_id },
+      include: [
+        {
+          as: 'comments',
+          model: models.Comment,
+          attributes: ['id', 'content'],
+        },
+      ],
+    });
+    if (!profile) return utils.errorStat(res, 401, 'Profile not found');
+    return utils.successStat(res, 200, 'profile', {
+      name: profile.name,
+      email: profile.email,
+    });
+  }
+
   /**
-   * @description updates a sinlge article
+   * @description updates a user profile
    * @param {Object} req - request object
    * @param {Object} res - response object
-   * @returns {Object} returns updated comments
+   * @returns {Object} returns updated user profile
    * @memberof UserController
    */
   static async updateProfile(req, res) {
