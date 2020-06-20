@@ -84,10 +84,11 @@ class UserController {
    */
   static async fetchOwnUserProfile(req, res) {
     const { user_id } = req.params;
+    const { id } = req.user;
     if (!user_id) {
       return utils.errorStat(res, 400, 'user_id is required');
     }
-    if (parseInt(user_id, 10) !== req.user.id) {
+    if (parseInt(user_id, 10) !== id) {
       return utils.errorStat(res, 403, 'Unauthorized');
     }
     const profile = await models.User.findOne({
@@ -102,6 +103,58 @@ class UserController {
     });
     if (!profile) return utils.errorStat(res, 401, 'Profile not found');
     return utils.successStat(res, 200, 'profile', profile);
+  }
+
+  /**
+   * @description updates a sinlge article
+   * @param {Object} req - request object
+   * @param {Object} res - response object
+   * @returns {Object} returns updated comments
+   * @memberof UserController
+   */
+  static async updateProfile(req, res) {
+    const { name, email } = req.body;
+    const { id } = req.user;
+    const { user_id } = req.params;
+    if (!name || !email) {
+      return utils.errorStat(res, 400, 'Name or Email canno be empty');
+    }
+    if (parseInt(user_id, 10) !== id) {
+      return utils.errorStat(res, 403, 'Unauthorized');
+    }
+    const user = await models.User.findOne({
+      where: {
+        [Op.and]: [{ id: parseInt(user_id, 10) }, { id }],
+      },
+    });
+
+    if (!user) {
+      return utils.errorStat(res, 404, 'user not found.');
+    }
+    await models.User.update(
+      { email, name },
+      {
+        returning: true,
+        where: {
+          [Op.and]: [{ id: parseInt(user_id, 10) }, { id }],
+        },
+      }
+    );
+
+    const updateResponse = await models.User.findOne({
+      where: {
+        [Op.and]: [{ id }, { id: user_id }],
+      },
+      include: [
+        {
+          as: 'comments',
+          model: models.Comment,
+          attributes: ['id', 'content', 'userId'],
+        },
+      ],
+    });
+
+    return utils.successStat(res, 200, 'profile', updateResponse);
   }
 }
 
