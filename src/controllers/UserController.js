@@ -105,7 +105,7 @@ class UserController {
     return utils.successStat(res, 200, 'profile', profile);
   }
 
-   /**
+  /**
    * @static
    * @description Allows a user to create a comment
    * @param {Object} req - Request object
