@@ -99,6 +99,11 @@ class UserController {
           model: models.Comment,
           attributes: ['id', 'content'],
         },
+        {
+          as: 'replies',
+          model: models.Reply,
+          attributes: ['id', 'content'],
+        },
       ],
     });
     if (!profile) return utils.errorStat(res, 401, 'Profile not found');

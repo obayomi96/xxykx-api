@@ -4,17 +4,18 @@ module.exports = (sequelize, DataTypes) => {
     {
       content: DataTypes.STRING,
       commentId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
     },
     {}
   );
   Reply.associate = (models) => {
     // associations can be defined here
     Reply.belongsTo(models.Comment, {
-      foreignKey: 'commentId',
+      foreignKey: 'replyId',
       as: 'comment',
     });
     Reply.belongsTo(models.User, {
-      foreignKey: 'userId',
+      foreignKey: 'id',
       as: 'user',
     });
   };

@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       content: DataTypes.STRING,
       userId: DataTypes.INTEGER,
+      replyId: DataTypes.INTEGER,
     },
     {}
   );
@@ -12,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     Comment.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
+    });
+    Comment.hasMany(models.Reply, {
+      foreignKey: 'commentId',
+      as: 'replies',
     });
   };
   return Comment;
