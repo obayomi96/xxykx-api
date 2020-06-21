@@ -14,7 +14,7 @@ for (let i = 0; i < 10; i += 1) {
   });
 }
 
-for (let i = 0; i < 50; i += 1) {
+for (let i = 0; i < 10; i += 1) {
   comments.push({
     content: faker.lorem.sentence(),
     userId: faker.random.number({
