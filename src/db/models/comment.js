@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       content: DataTypes.STRING,
       userId: DataTypes.INTEGER,
-      replyId: DataTypes.INTEGER,
     },
     {}
   );
