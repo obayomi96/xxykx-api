@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && npm run migrate && npm run seed && babel ./src --out-dir ./build",
     "start": "node build/app.js",
-    "dev": "export DEBUG=dev && nodemon --exec babel-node src/app.js",
+    "dev": "set DEBUG=dev && nodemon --exec babel-node src/app.js",
     "clean": "rm -rf build && mkdir build",
     "lint": "eslint .",
     "seed": "npm run seed:all",
