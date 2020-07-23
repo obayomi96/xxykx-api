@@ -13,18 +13,18 @@ env:
     - export NODE_ENV=test
 services:
   - postgresql
-before_script:
-  - psql -c 'create database comments-api-test; ' -U postgres
-#   before_script:
+# before_script:
 #   - psql -c 'create database comments-api-test; ' -U postgres
-#   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-#   - chmod +x ./cc-test-reporter
-#   - ./cc-test-reporter before-build
+  before_script:
+  - psql -c 'create database comments-api-test; ' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
-# script:
-#   - "npm run nyc"
+script:
+  - "npm run nyc"
 
-# after_script:
-#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:
   - nyc report --reporter=text-lcov | coveralls
