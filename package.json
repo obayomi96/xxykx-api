@@ -8,6 +8,7 @@
     "start": "node build/app.js",
     "dev": "set DEBUG=dev && nodemon --exec babel-node src/app.js",
     "test": "set NODE_ENV=test && nyc mocha --timeout 10000  --require @babel/register '**/*.spec.js' --exit",
+    "nyc": "nyc --exclude '**/*.spec.js' --exclude 'src/database/**' --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf build && mkdir build",
     "lint": "eslint .",
