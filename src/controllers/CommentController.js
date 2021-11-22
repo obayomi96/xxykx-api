@@ -166,12 +166,23 @@ class CommentController {
     const { comment_id } = req.params;
     const { id } = req.user;
     if (!comment_id) {
+      return utils.errorStat(res, 404, 'Add comment id');
+    }
+    const comment = await models.Comment.findOne({
+      where: {
+        [Op.and]: [{ id: parseInt(comment_id, 10) }],
+      },
+    });
+    if (comment.userId !== id) {
+      return utils.errorStat(res, 404, 'You can only delete your own comment!');
+    }
+    if (!comment) {
       return utils.errorStat(res, 404, 'Comment not found');
     }
     models.Comment.destroy({
       returning: true,
       where: {
-        [Op.and]: [{ id: comment_id }, { userId: id }],
+        [Op.and]: [{ id: comment_id }],
       },
     });
     return utils.successStat(
