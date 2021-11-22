@@ -43,8 +43,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
-  log(`Running on port ${port}`);
+app.listen(4000, () => {
+  console.log('server upp at ' + 4000)
+  // log(`Running on port ${port}`);
 });
 
 export default app;
